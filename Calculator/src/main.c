@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "algorithm/Stack.h"
 #include "Calculator.h"
 
 
