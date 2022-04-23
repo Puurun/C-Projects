@@ -1,6 +1,16 @@
 #include "Calculator.h"
+#include "algorithm/Stack.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#define NUM_SIZE 50
+#define MAX_LEN 100
+#define True 1
+#define False 0
 
-char* GetInput(){
+
+// Get Input from the user. Have to free the input later.
+char* GetInput(void){
 	// Variable
 	char* input = malloc(MAX_LEN*sizeof(char));
 	int i=0, c;
@@ -14,38 +24,43 @@ char* GetInput(){
 	return input;
 }
 
-void AnalyzeEquation(char[] eq){
-	
-}
 
-int CalculateBasicEquation(char[] eq){
-	int n_eq = 20, i=0, num=0;
-	char* numbers[50] = malloc(n_eq*sizeof(int));
-	char temp_num[50];
+int PostFixEquation(char* eq){
+	int i=0, num=0, opt=0, num_size=0;
+	int numbers[NUM_SIZE];
+	char operators[NUM_SIZE];
+	char temp_num[NUM_SIZE];
 	
 	for(i=0; i<MAX_LEN; i++){
 		// read one char from equation
 		char c = *(eq+i);
 		
-		// if operator, put atoi(temp_num) into numbers 
-		// clear temp_num, and move pointer to the next one
-		if(isOperator(c)){
+		// if operator or whitespace, put atoi(temp_num) into numbers 
+		// clear temp_num, increase num
+		// put operator into operators, increase opt
+		if(isOperator(c) || (isWhiteSpace(c)&&num_size!=0)){
 			temp_num[i] = 0;
-			*(numbers+num) = atoi(temp_num);
-			printf("%d", *(numbers+num));
+			numbers[num] = atoi(temp_num);
+			printf("%d", numbers[num]);
+			
+			memset(temp_num, 0, sizeof(temp_num));
+			num_size = 0;
 			num++;
-			memset(temp_num, 0, 50*sizeof(int));
-		}
-		// if blank, move to next
-		else if(isWhiteSpace(c)){
-			continue;
+			
+			if(isOperator(c)){
+				operators[opt] = c;
+				opt++;
+			}
 		}
 		// else, put char in temp_num
 		else{
-			temp_num[i] = c;
+			temp_num[num_size] = c;
+			num_size++;
 		}
 		
 	}
+	
+	
 }
 
 // Check if char is operator (+, -, *, /)

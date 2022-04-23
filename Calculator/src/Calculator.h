@@ -2,24 +2,9 @@
 #define __Calculator__
 
 
-
-char* GetInput();
-void AnalyzeEquation(char[] eq);
-int CalculateBasicEquation(char[] eq);
+char* GetInput(void);
+int PostFixEquation(char* eq);
 int isOperator(char c);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int isWhiteSpace(char c);
 
 #endif

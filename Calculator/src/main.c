@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include "algorithm/Stack.h"
 #include "Calculator.h"
-#define True 1
-#define False 0
-#define MAX_LEN 100
+
+
 
 
 /*
@@ -22,7 +21,7 @@ TODO
 
 int main(int argc, char* argv[]) {
 	char* input = GetInput();
-	CalculateBasicEquation(input);
+	PostFixEquation(input);
 	
 	return 0;
 }
