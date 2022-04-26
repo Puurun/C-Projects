@@ -13,18 +13,39 @@ int Calculate(void){
 	char* input;
 	char** tokenized_equation;
 	char** post_equation;
-	int answer;
+	int answer, i;
 	
+	// get input
 	input = GetInput();
-	tokenized_equation = Tokenize(input);
-	post_equation = PostFixEquation(tokenized_equation);
-	answer = CalculateEquation(post_equation);
 	
+	// tokenize input and free input
+	tokenized_equation = Tokenize(input);
+	free(input);
+	
+	// make tokenized equation into postfix equation
+	// free tokenized equation
+	post_equation = PostFixEquation(tokenized_equation);
+	for(i=0; tokenized_equation[i][0]!='='; i++)
+		free(tokenized_equation[i]);
+	free(tokenized_equation[i]);
+	free(tokenized_equation);
+	
+	// calculate postfix equation
+	// free postfix equation
+	answer = CalculateEquation(post_equation);
+	for(i=0; post_equation[i][0]!='='; i++)
+		free(post_equation[i]);
+	free(post_equation[i]);
+	free(post_equation);
+	
+	// print answer
 	printf("\n\n");
 	printf("answer: %.2lf \n", (double)answer);
 	
-	free(input);
+	
+	return 1;
 }
+// flush input
 void iflush(void){
 	char c;
 	while(c != '\n'){
@@ -97,9 +118,9 @@ char** Tokenize(char* eq){
 		// case inf. equation error
 		else{
 			printf("The equation has something wrong inside!!!!!!");
+			cur_pos++;
 		}
 	}
-	fflush(stdout);
 	return token_array;
 }
 
@@ -195,6 +216,9 @@ char** PostFixEquation(char** eq){
 	for(int i=0; i<count_post; i++){
 		printf("%s ", post_eq[i]);
 	}
+	
+	// free memory allocated in stack
+	StackDel(opt_stack);
 	return post_eq;
 	
 }

@@ -7,15 +7,10 @@
 
 /*
 TODO
-1. check if memory is freed after allocating
-2. Create Stack
 
+1. add other operations (cos, sin, tan, ...etc)
+2. add a more complicated cui
 
-
-
-1. Get Input (String)
-2. Tokenize
-3. 
 */
 
 int main(void) {
